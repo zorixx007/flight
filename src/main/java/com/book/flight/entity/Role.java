@@ -9,7 +9,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")
-    private int roleID;
+    private long roleID;
     @Column(name="role_name")
     private String roleName;
     @ManyToMany
@@ -19,11 +19,11 @@ public class Role {
     public Role () {
     }
 
-    public int getRoleID () {
+    public long getRoleID () {
         return roleID;
     }
 
-    public void setRoleID ( int roleID ) {
+    public void setRoleID ( long roleID ) {
         this.roleID = roleID;
     }
 
@@ -49,5 +49,20 @@ public class Role {
                 "roleID=" + roleID +
                 ", roleName='" + roleName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals ( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass ( ) != o.getClass ( ) ) return false;
+
+        Role role = (Role) o;
+
+        return roleName.equalsIgnoreCase ( role.roleName );
+    }
+
+    @Override
+    public int hashCode () {
+        return roleName.hashCode ( );
     }
 }

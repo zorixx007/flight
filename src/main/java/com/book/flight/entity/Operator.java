@@ -1,6 +1,7 @@
 package com.book.flight.entity;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
@@ -8,26 +9,35 @@ import java.util.Collection;
 public class Operator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="operator_id")
-    private int operatorID;
+    @Column(name = "operator_id")
+    private long operatorID;
     private String password;
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
     private String email;
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(name="operator_role", joinColumns=@JoinColumn(name="operator_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+    private String status;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "operator_role", joinColumns = @JoinColumn(name = "operator_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
     public Operator () {
     }
 
-    public int getOperatorID () {
+    public String getStatus () {
+        return status;
+    }
+
+    public void setStatus ( String status ) {
+        this.status = status;
+    }
+
+    public long getOperatorID () {
         return operatorID;
     }
 
-    public void setOperatorID ( int operatorID ) {
+    public void setOperatorID ( long operatorID ) {
         this.operatorID = operatorID;
     }
 
@@ -79,7 +89,9 @@ public class Operator {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-//                ", roles=" + roles.forEach (  ); +
+                ", status='" + status + '\'' +
+                ", roles=" + Arrays.toString ( roles.toArray ( ) ) +
                 '}';
     }
+
 }

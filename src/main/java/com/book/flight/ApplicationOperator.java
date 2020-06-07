@@ -1,18 +1,20 @@
 package com.book.flight;
 
 import com.book.flight.entity.Role;
+import com.book.flight.service.IOperatorService;
 import com.book.flight.service.IRoleService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ApplicationTest {
+public class ApplicationOperator {
     public static void main ( String[] args ) {
         run ();
     }
-    private static void run(){
+    private static void run() {
         ApplicationContext context = new ClassPathXmlApplicationContext ( "beans.xml" );
-        IRoleService roleService = context.getBean ( IRoleService.class );
-        Role testRole = roleService.findById ( 1 );
-        System.out.println (testRole );
+        IOperatorService operatorService = context.getBean ( IOperatorService.class );
+//        operatorService.findById ( 1 ).ifPresent ( System.out::println );
+        operatorService.getSortedByFirstName().forEach ( n-> System.out.println (n ) );
+
     }
 }
