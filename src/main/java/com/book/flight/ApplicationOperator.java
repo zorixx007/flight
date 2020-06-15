@@ -15,6 +15,8 @@ public class ApplicationOperator {
         IOperatorService operatorService = context.getBean ( IOperatorService.class );
 //        operatorService.findById ( 1 ).ifPresent ( System.out::println );
         operatorService.getSortedByFirstName().forEach ( n-> System.out.println (n ) );
+        System.out.println ("find by email ba@ex.com" );
+        operatorService.findByEmail("ba@ex.com").ifPresent ( System.out::println );
 
     }
 }

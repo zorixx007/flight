@@ -19,9 +19,15 @@ public class OperatorService implements IOperatorService {
         return operatorRepository.findById ( id );
     }
 
-
+    @Override
     public List<Operator> getSortedByFirstName(){
         return operatorRepository.findAllByOrderByFirstName ( );
     }
+
+    @Override
+    public Optional<Operator> findByEmail ( String str ){
+        return operatorRepository.findOperatorByEmail ( str );
+    }
+
 
 }
